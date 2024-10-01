@@ -33,7 +33,7 @@ Route::get('/', function () {
 
 
 
-  //  Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
 
     //Route Entreprise
     Route::get('/entreprise/new', [EntrepriseController::class, 'newentreprise'])->name('entreprise.new');
@@ -267,4 +267,4 @@ Route::get('/', function () {
         return redirect('/');
 
    })->name('logout');
-//});
+});
