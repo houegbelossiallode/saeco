@@ -52,7 +52,8 @@ class RendezVousNotification extends Notification
         return (new MailMessage)
                     ->subject('Rappel de rendez-vous')
                    // ->action('Notification Action', url('/'))
-                    ->line('Vôtre rendez-vous avec Mr/Mme  ' . $this->rendezvous->client->user->nom . ' ' . $this->rendezvous->client->user->prenom. ' est pour aujoud\'hui  ' . $this->rendezvous->date_du_rdv);
+                    ->line('Bonjour   ')
+                    ->view('notifications.rds', ['nom' =>  $this->rendezvous->client->user->nom,'prenom'=>$this->rendezvous->client->user->prenom,'date'=>$this->rendezvous->date_du_rdv]);
     }
 
     /**
