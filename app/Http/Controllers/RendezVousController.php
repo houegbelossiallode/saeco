@@ -40,8 +40,9 @@ class RendezVousController extends Controller
      
      $mesRendezVous = Rd::with('client')->orderBy('created_at', 'desc')->where('user_id',$id)->get();
 
-     $commercial = Auth::user()->id;
+     $user = Auth::user();
 
+     $commercial = $user->commercial;
    // Récupérer les collaborateurs et leurs rendez-vous, si le commercial est un chef
    $rendezVousCollaborateurs = collect(); // Créer une collection vide
 
