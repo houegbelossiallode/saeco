@@ -65,6 +65,7 @@ class UsersController extends Controller
 
         $messages = [
             'code.required' => 'Le code commercial doit être renseigné',
+            'code.unique' => 'Ce code est déjà utilisé.',
             'sexe.required' => 'Veuillez choisir votre civilité(e).',
             'nom.required' => 'Veuillez entrer votre nom.',
             'prenom.required' => 'Veuillez entrer votre prénom.',
@@ -231,7 +232,7 @@ class UsersController extends Controller
         if ($role === 'Commercial') {
             $rules['niveau'] = 'required';
             $rules['agence'] = 'required';
-            $rules['code'] = 'required';
+            $rules['code'] = 'required|code|unique:commercials,code';
         }
 
         if ($role === 'Personnel') {
@@ -249,6 +250,7 @@ class UsersController extends Controller
 
         $messages = [
             'code.required' => 'Le code commercial doit être renseigné',
+            'code.unique' => 'Ce code est déjà utilisé.',
             'nom.required' => 'Veuillez entrer votre nom.',
             'prenom.required' => 'Veuillez entrer votre prénom.',
             'date.required' => 'Veuillez renseigner votre date de naissance.',
@@ -281,6 +283,7 @@ class UsersController extends Controller
             $query4 = $user->forceFill([
                 'agence_id' => $request->agence,
                 'statut_id' => $request->niveau,
+                'code' => $request->code,
             ])->save();
         } else {
             $query4 = true;
