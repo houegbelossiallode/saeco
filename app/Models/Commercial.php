@@ -53,6 +53,13 @@ class Commercial extends Model
         return $this->hasMany(Commercial::class, 'id_chef');
     }
 
+
+    public function rd()
+    {
+        return $this->hasMany(Rd::class,'user_id');
+    }
+
+    
     public function delete()
     {
         $this->clients()->delete();

@@ -35,9 +35,24 @@ class RendezVousController extends Controller
      //  }
 
      $id = Auth::user()->id;
-        $rds = Rd::with('client')->orderBy('created_at', 'desc')->where('user_id',$id)->get();
+
+     //Récuperer les rendez-vous du commercial connecté
+     
+     $mesRendezVous = Rd::with('client')->orderBy('created_at', 'desc')->where('user_id',$id)->get();
+
+// Si le commercial est un chef, récupérer les rendez-vous des collaborateurs
+$rendezVousCollaborateurs = $id->collaborateurs->flatMap(function ($collaborateur) {
+    return $collaborateur->rds()->with('client')->get();
+});
+
+// Fusionner les deux collections
+$tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
+
+
+
+        
       //  $date = Carbon::parse($rds->date_du_rdv); // Convertir en objet Carbon
-        return view('rds.index', compact('rds'));
+        return view('rds.index', compact('tousLesRendezVous'));
     }
 
 
