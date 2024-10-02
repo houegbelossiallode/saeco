@@ -27,7 +27,7 @@
                         </div>
                         <div class="input-field col s12 l6">
                             <input id="niveau" name="niveau" type="number"
-                                class="validate @error('niveau') is-invalid @enderror" value="{{ old('niveau') }}">
+                                class="validate @error('niveau') is-invalid @enderror" value="{{ old('niveau') }}" min="1">
                             <label for="niveau">Niveau</label>
                             @error('niveau')
                                 <span id="niveauHelp" class="form-text red-text">{{ $message }}</span>

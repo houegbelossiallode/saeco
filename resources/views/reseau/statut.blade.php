@@ -31,7 +31,9 @@
                             <thead>
                                 <tr>
                                     <th>Niveau</th>
+                                    @if (Auth::user()->role == 'Courtier')
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,10 +41,12 @@
                                     <tr>
                                         <td>{{ 'Niveau ' . $statut->niveau }}</td>
                                         <td>
+                                            @if (Auth::user()->role == 'Courtier')
                                             {{-- @if ($loop->last) --}}
                                             <a href="{{ route('statut.delete', $statut->id) }}" class="btn btn-small red">
                                                 <i class="ti-close" aria-hidden="true"></i>
                                             </a>
+                                            @endif
                                             {{-- @endif --}}
                                         </td>
                                     </tr>
@@ -55,7 +59,9 @@
                             <tfoot>
                                 <tr>
                                     <th>Niveau</th>
+                                    @if (Auth::user()->role == 'Courtier')
                                     <th>Action</th>
+                                    @endif
                                 </tr>
                             </tfoot>
                         </table>
