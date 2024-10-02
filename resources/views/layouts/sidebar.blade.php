@@ -42,10 +42,16 @@
                                     <li><a href="{{ route('hierachie.liste') }}"><i
                                                 class="material-icons">adjust</i><span class="hide-menu">Mon
                                                 réseau</span></a></li>
+                                     <li><a href="{{ route('rds.index') }}"><i
+                                                    class="material-icons">adjust</i><span class="hide-menu">Mes Rendez-vous
+                                     </span></a></li>
                                 @endif
+
+                                @if (Auth::user()->role == 'Courtier')
                                 <li><a href="{{ route('objectif.liste') }}"><i class="material-icons">adjust</i><span
                                             class="hide-menu">Mes
                                             objectifs</span></a></li>
+                                @endif
                                 {{-- <li><a href="{{ route('compagnie.liste') }}"><i class="material-icons">adjust</i><span
                                             class="hide-menu">Compagnie</span></a></li> --}}
                             </ul>
