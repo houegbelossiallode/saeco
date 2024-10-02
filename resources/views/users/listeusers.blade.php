@@ -43,6 +43,7 @@
                                             <th>Tel</th>
                                             <th>Adresse</th>
                                             <th>Agence</th>
+                                            <th>Code Commercial</th>
                                             <th>Niveau</th>
                                             <th>chef</th>
                                             <th>Action</th>
@@ -60,6 +61,7 @@
                                                 <td>{{ $commercial->user->tel }}</td>
                                                 <td>{{ $commercial->user->adresse }}</td>
                                                 <td>{{ $commercial->agence->libelle }}</td>
+                                                <td>{{ $commercial->code ?? 'Aucun code Commercial' }}</td>
                                                 <td>{{ $commercial->user->role == 'Courtier' ? 'Courtier' : 'Niveau ' . $commercial->statut->niveau }}
                                                 </td>
                                                 <td>{{ $commercial->user->role == 'Courtier' ? 'Courtier' : ($commercial->chef ? $commercial->chef->user->nom . ' ' . $commercial->chef->user->prenom : '') }}
