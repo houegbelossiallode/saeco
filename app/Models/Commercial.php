@@ -54,7 +54,7 @@ class Commercial extends Model
     }
 
 
-    public function rd()
+    public function rendezVous()
     {
         return $this->hasMany(Rd::class,'user_id');
     }

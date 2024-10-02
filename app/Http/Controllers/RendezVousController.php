@@ -34,33 +34,42 @@ class RendezVousController extends Controller
       //  $commercial->notify(new RendezVousNotification($rdv));
      //  }
 
-     $id = Auth::user()->id;
+     // Récupérer l'utilisateur connecté
+    $user = Auth::user();
 
-     //Récuperer les rendez-vous du commercial connecté
-     
-     $mesRendezVous = Rd::with('client')->orderBy('created_at', 'desc')->where('user_id',$id)->get();
+    // Récupérer le commercial associé à l'utilisateur
+    $commercial = $user->commercial; // Le commercial associé à cet utilisateur
 
-     $user = Auth::user();
+    // Vérifiez si le commercial existe
+    if (!$commercial) {
+        return redirect()->back()->withErrors(['error' => 'Aucun commercial associé à cet utilisateur.']);
+    }
 
-     $commercial = $user->commercial;
-   // Récupérer les collaborateurs et leurs rendez-vous, si le commercial est un chef
-   $rendezVousCollaborateurs = collect(); // Créer une collection vide
+    // Récupérer les rendez-vous du commercial connecté
+    $mesRendezVous = $commercial->rendezVous()->with('client')->get();
 
-   if ($commercial->collaborateurs()->exists()) { // Vérifiez si des collaborateurs existent
-       $collaborateurs = $commercial->collaborateurs()->with('client')->get();
-       $rendezVousCollaborateurs = $collaborateurs->flatMap(function ($collaborateur) {
-           return $collaborateur->rendezVous()->with('client')->get();
-       });
-   }
+    // Récupérer les collaborateurs et leurs rendez-vous
+    $rendezVousCollaborateurs = collect(); // Créer une collection vide
 
-   // Fusionner les deux collections
-   $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
+    // Vérifiez si le commercial a des collaborateurs
+    if ($commercial->collaborateurs()->count() > 0) {
+        // Si le commercial a des collaborateurs, on récupère leurs rendez-vous
+        $collaborateurs = $commercial->collaborateurs()->with('rendezVous.client')->get();
+        $rendezVousCollaborateurs = $collaborateurs->flatMap(function ($collaborateur) {
+            return $collaborateur->rendezVous()->with('client')->get();
+        });
+    }
+
+    // Fusionner les rendez-vous du commercial et ceux de ses collaborateurs
+    $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
+
+    // Passer les rendez-vous à la vue
 
 
-
-        
+    // $id = Auth::user()->id;
+     //   $rds = Rd::with('client')->orderBy('created_at', 'desc')->where('user_id',$id)->get();
       //  $date = Carbon::parse($rds->date_du_rdv); // Convertir en objet Carbon
-        return view('rds.index', compact('tousLesRendezVous'));
+        return view('rds.index', compact('rds'));
     }
 
 
