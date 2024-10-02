@@ -47,7 +47,7 @@ class UsersController extends Controller
         if ($request->input('role') === 'Commercial') {
             $rules['niveau'] = 'required';
             $rules['agence'] = 'required';
-            $rules['code'] = 'required';
+            $rules['code'] = 'required|string|unique:commercials,code';
         }
 
         if ($request->input('role') === 'Personnel') {
@@ -232,7 +232,7 @@ class UsersController extends Controller
         if ($role === 'Commercial') {
             $rules['niveau'] = 'required';
             $rules['agence'] = 'required';
-            $rules['code'] = 'required|code|unique:commercials,code';
+            $rules['code'] = 'required|string|unique:commercials,code';
         }
 
         if ($role === 'Personnel') {
