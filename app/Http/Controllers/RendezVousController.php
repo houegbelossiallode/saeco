@@ -40,10 +40,12 @@ class RendezVousController extends Controller
      
      $mesRendezVous = Rd::with('client')->orderBy('created_at', 'desc')->where('user_id',$id)->get();
 
-// Si le commercial est un chef, récupérer les rendez-vous des collaborateurs
-$rendezVousCollaborateurs = $id->collaborateurs->flatMap(function ($collaborateur) {
-    return $collaborateur->rds()->with('client')->get();
-});
+     $commercial = Auth::user();
+
+    // Si le commercial est un chef, récupérer les rendez-vous des collaborateurs
+    $rendezVousCollaborateurs = $commercial->collaborateurs->flatMap(function ($collaborateur) {
+        return $collaborateur->rds()->with('client')->get();
+    });
 
 // Fusionner les deux collections
 $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
