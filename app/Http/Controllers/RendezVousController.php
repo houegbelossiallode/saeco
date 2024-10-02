@@ -44,10 +44,10 @@ class RendezVousController extends Controller
     if (!$commercial) {
         return redirect()->back()->withErrors(['error' => 'Aucun commercial associé à cet utilisateur.']);
     }
-    dd($commercial->id);
+   // dd($commercial->id);
     // Récupérer les rendez-vous du commercial connecté
     $mesRendezVous = $commercial->rendezVous()->with('client')->get();
-
+    dd($mesRendezVous);
     // Récupérer les collaborateurs et leurs rendez-vous
     $rendezVousCollaborateurs = collect(); // Créer une collection vide
 
