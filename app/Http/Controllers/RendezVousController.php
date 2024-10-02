@@ -69,7 +69,7 @@ class RendezVousController extends Controller
     // $id = Auth::user()->id;
      //   $rds = Rd::with('client')->orderBy('created_at', 'desc')->where('user_id',$id)->get();
       //  $date = Carbon::parse($rds->date_du_rdv); // Convertir en objet Carbon
-        return view('rds.index', compact('rds'));
+        return view('rds.index', compact('tousLesRendezVous'));
     }
 
 
