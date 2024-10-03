@@ -4,7 +4,7 @@
 
         <p>
 
-           {{ $message }} avec le prospect  :
+            avec le prospect  :
 
            {{ $nom . ' ' . $prenom }} 
 
