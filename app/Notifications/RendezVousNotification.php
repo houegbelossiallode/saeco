@@ -62,10 +62,13 @@ class RendezVousNotification extends Notification
         } else {
             $message = 'Votre rendez-vous est prévu pour le ' . $rendezVousDate->format('d/m/Y') .'.';
        }
+
+       $appUrl = config('app.url');
+       
         return (new MailMessage)
                     ->subject('Rappel de rendez-vous')
                     ->line($message)
-                    ->action('Voir le rendez-vous', url('/rds/show/' . $this->rendezvous->id)) // Génère 
+                    ->action('Voir le rendez-vous', $appUrl . '/rds/show/' . $this->rendezvous->id) // Génère 
                    // ->view('notifications.rds', ['message'=>$message,'nom' =>  $this->rendezvous->client->user->nom,'prenom'=>$this->rendezvous->client->user->prenom,'date'=>$this->rendezvous->date_du_rdv]);
                      ->line('Merci d\'utiliser nôtre application');
                 }
