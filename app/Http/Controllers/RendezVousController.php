@@ -47,33 +47,35 @@ class RendezVousController extends Controller
    // }
    // dd($commercial->id);
     // Récupérer les rendez-vous du commercial connecté
-   // $mesRendezVous = Rd::where('user_id',$commercial->user_id)->get();
+    $mesRendezVous = Rd::where('commercial_id',$commercial->id)->get();
    // dd($mesRendezVous);
     // Récupérer les collaborateurs et leurs rendez-vous
-   // $rendezVousCollaborateurs = collect(); // Créer une collection vide
+    $rendezVousCollaborateurs = collect(); // Créer une collection vide
 
     // Vérifiez si le commercial a des collaborateurs
-   // if ($commercial->collaborateurs()->count() > 0) {
+    if ($commercial->collaborateurs()->count() > 0) {
         // Si le commercial a des collaborateurs, on récupère leurs rendez-vous
-    //    $collaborateurs = $commercial->collaborateurs()->with('rendezVous.client')->get();
-    //    $rendezVousCollaborateurs = $collaborateurs->flatMap(function ($collaborateur) {
-    //        return $collaborateur->rendezVous()->with('client')->get();
-    //    });
-   // }
+        $collaborateurs = $commercial->collaborateurs()->get();
+        $rendezVousCollaborateurs = $collaborateurs->flatMap(function ($collaborateur) {
+            return $collaborateur->rendezVous()->with('client')->get();
+        });
+    }
    // Si l'utilisateur est un manager (un commercial avec des subordonnés)
    // Si l'utilisateur est un simple commercial sans subordonnés
-    if ($commercial->collaborateurs->isEmpty()) {
-        $mesRendezVous = Rd::where('commercial_id',$commercial->id)->get();
-      }
-    else {
+
+   
+   // if ($commercial->collaborateurs->isEmpty()) {
+    //    $mesRendezVous = Rd::where('commercial_id',$commercial->id)->get();
+   //   }
+   // else {
        // Récupérer les rendez-vous du manager et de ses subordonnés
-       $mesRendezVous = Rd::where('commercial_id',$commercial->id)
-           ->orWhereIn('commercial_id', $commercial->collaborateurs->pluck('commercial_id'))
-           ->get();
-        }
+   //    $mesRendezVous = Rd::where('commercial_id',$commercial->id)
+   //        ->orWhereIn('commercial_id', $commercial->collaborateurs->pluck('commercial_id'))
+   //        ->get();
+   //     }
      // Fusionner les rendez-vous du commercial et ceux de ses collaborateurs
-     // $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
-    //dd($mesRendezVous);
+      $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
+    dd($tousLesRendezVous);
     // Passer les rendez-vous à la vue
 
 
