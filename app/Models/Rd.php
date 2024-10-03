@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rd extends Model
 {
     use HasFactory;
-    protected $fillable = ['prime','produit_id','client_id','user_id','notes','date_du_rdv'];
+    protected $fillable = ['prime','produit_id','client_id','commercial_id','notes','date_du_rdv'];
 
     public function client()
     {
@@ -17,7 +17,7 @@ class Rd extends Model
 
     public function commercial()
     {
-        return $this->belongsTo(Commercial::class,'user_id');
+        return $this->belongsTo(Commercial::class);
     }
 
     public function produit()
