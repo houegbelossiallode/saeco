@@ -255,7 +255,8 @@ Route::get('/', function () {
     Route::get('/edit/{rd}',[RendezVousController::class, 'edit'])->name('rds.edit');
     Route::post('/update/{rd}',[RendezVousController::class, 'update'])->name('rds.update');
     Route::get('/delete/{rd}',[RendezVousController::class, 'delete'])->name('rds.delete');
-    });
+    Route::get('/show/{id}',[RendezVousController::class, 'show'])->name('rds.show');   
+});
 
 
 

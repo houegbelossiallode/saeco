@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Auth;
 class RendezVousController extends Controller
 {
 
+   public function show($id){
+    $rendezvous = Rd::with('client')->find($id);
+    return view('rds.show', compact('rendezvous'));
+   }
 
+    
     public function index(){
 
       //  $commercial =  Auth::user();

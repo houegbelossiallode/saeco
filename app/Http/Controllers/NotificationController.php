@@ -13,6 +13,23 @@ class NotificationController extends Controller
 {
     public function checkRendezVous()
     {
+
+
+        $tommorrow = now()->addDay()->format('Y-m-d');
+
+        // Récupérer les rendez-vous d'aujourd'hui
+        $rendezVous = Rd::whereDate('date_du_rdv', $tommorrow)->get();
+
+        foreach ($rendezVous as $rendez) {
+            // Envoyer l'email
+            $destinataire = User::find($rendez->user_id); // Remplace par le nom réel
+            $destinataire->notify(new RendezVousNotification($rendez));
+
+           // Mail::to('chef@example.com')->send(new RendezVousNotification($clientName, $today->format('Y-m-d')));
+        }
+
+
+        
         $today = Carbon::today();
 
         // Récupérer les rendez-vous d'aujourd'hui

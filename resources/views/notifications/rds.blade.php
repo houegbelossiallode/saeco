@@ -4,11 +4,9 @@
 
         <p>
 
-           Vôtre rendez avec le prospect  :
+           {{ $message }} avec le prospect  :
 
-           {{ $nom . ' ' . $prenom }} <br>
-
-           est pour aujourd'hui : {{ $date }}
+           {{ $nom . ' ' . $prenom }} 
 
 
         </p> <br>

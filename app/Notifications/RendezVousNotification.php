@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -49,11 +50,23 @@ class RendezVousNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+
+        $rendezVousDate = Carbon::parse($this->rendezvous->date_du_rdv);
+        $now = Carbon::now();
+
+        // Déterminer si le rendez-vous est pour demain ou aujourd'hui
+        if ($rendezVousDate->isTomorrow()) {
+            $message = 'Votre rendez-vous est prévu pour demain.';
+        } elseif ($rendezVousDate->isToday()) {
+            $message = 'Votre rendez-vous est prévu pour aujourd\'hui.';
+        } else {
+            $message = 'Votre rendez-vous est prévu pour le ' . $rendezVousDate->format('d/m/Y') .'.';
+       }
         return (new MailMessage)
                     ->subject('Rappel de rendez-vous')
-                   // ->action('Notification Action', url('/'))
-                    ->line('Bonjour   ')
-                    ->view('notifications.rds', ['nom' =>  $this->rendezvous->client->user->nom,'prenom'=>$this->rendezvous->client->user->prenom,'date'=>$this->rendezvous->date_du_rdv]);
+                    ->action('Voir le rendez-vous', url('/rds/show/' . $this->rendezvous->id)) // Génère 
+                    
+                    ->view('notifications.rds', ['message'=>$message,'nom' =>  $this->rendezvous->client->user->nom,'prenom'=>$this->rendezvous->client->user->prenom,'date'=>$this->rendezvous->date_du_rdv]);
     }
 
     /**
