@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RdsRequest;
 use App\Models\Client;
+use App\Models\Commercial;
 use App\Models\Produit;
 use App\Models\Rd;
 use App\Models\User;
@@ -38,16 +39,16 @@ class RendezVousController extends Controller
     $user = Auth::user();
 
     // Récupérer le commercial associé à l'utilisateur
-    $commercial = $user->commercial; // Le commercial associé à cet utilisateur
-   
+    $commercial = Commercial::where('user_id',$user->id); // Le commercial associé à cet utilisateur
+   dd($commercial);
     // Vérifiez si le commercial existe
-    if (!$commercial) {
-        return redirect()->back()->withErrors(['error' => 'Aucun commercial associé à cet utilisateur.']);
-    }
+   // if (!$commercial) {
+   //     return redirect()->back()->withErrors(['error' => 'Aucun commercial associé à cet utilisateur.']);
+   // }
    // dd($commercial->id);
     // Récupérer les rendez-vous du commercial connecté
     $mesRendezVous = Rd::all();
-    dd($mesRendezVous);
+   // dd($mesRendezVous);
     // Récupérer les collaborateurs et leurs rendez-vous
     $rendezVousCollaborateurs = collect(); // Créer une collection vide
 
