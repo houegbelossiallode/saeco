@@ -68,7 +68,7 @@ class RendezVousController extends Controller
     else {
        // Récupérer les rendez-vous du manager et de ses subordonnés
        $mesRendezVous = Rd::with('commercial')->where('commercial_id',$commercial->user_id)
-           ->orWhereIn('user_id', $commercial->collaborateurs->pluck('user_id'))
+           ->orWhereIn('commercial_id', $commercial->collaborateurs->pluck('commercial_id'))
            ->get();
         }
      // Fusionner les rendez-vous du commercial et ceux de ses collaborateurs
