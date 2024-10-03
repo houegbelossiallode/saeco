@@ -63,17 +63,17 @@ class RendezVousController extends Controller
    // Si l'utilisateur est un manager (un commercial avec des subordonnés)
    // Si l'utilisateur est un simple commercial sans subordonnés
     if ($commercial->collaborateurs->isEmpty()) {
-        $mesRendezVous = Rd::with('commercial')->where('commercial_id',$commercial->user_id)->get();
+        $mesRendezVous = Rd::where('commercial_id',$commercial->user_id)->get();
       }
     else {
        // Récupérer les rendez-vous du manager et de ses subordonnés
-       $mesRendezVous = Rd::with('commercial')->where('commercial_id',$commercial->user_id)
+       $mesRendezVous = Rd::where('commercial_id',$commercial->user_id)
            ->orWhereIn('commercial_id', $commercial->collaborateurs->pluck('commercial_id'))
            ->get();
         }
      // Fusionner les rendez-vous du commercial et ceux de ses collaborateurs
      // $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
-    
+    dd($mesRendezVous);
     // Passer les rendez-vous à la vue
 
 
