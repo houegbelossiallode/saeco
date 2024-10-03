@@ -73,7 +73,9 @@ class RendezVousController extends Controller
         }
     // Fusionner les rendez-vous du commercial et ceux de ses collaborateurs
    // $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
-  dd($mesRendezVous->commercial->user->nom);
+   foreach ($mesRendezVous as $rd) {
+     dd($rd->commercial);
+}
     // Passer les rendez-vous à la vue
 
 
