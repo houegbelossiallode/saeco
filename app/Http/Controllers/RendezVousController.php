@@ -101,16 +101,16 @@ class RendezVousController extends Controller
       $date = $request->date_du_rdv;
      // dd($date);
       $formattedDate = date('Y-m-d', strtotime($date));
-      $user = Auth::user()->id;
+      $user = Auth::user();
          // Récupérer l'utilisateur connecté
-       //  $commercial = Commercial::where('user_id',$user->id)->first(); // Le commercial associé à cet utilisateur
+         $commercial = Commercial::where('user_id',$user->id)->first(); // Le commercial associé à cet utilisateur
          //dd($commercial->user_id);
         $rd->date_du_rdv = $formattedDate;
         $rd->client_id =  $request->client_id;
         $rd->produit_id =  $request->produit_id;
         $rd->notes = $request->notes;
         $rd->prime = $request->prime;
-        $rd->commercial_id = $user;
+        $rd->commercial_id = $commercial->user->id;
         $rd->save();
         
         return redirect()->route("rds.index")->with("success","Rendez-vous  enregistré avec succès");
