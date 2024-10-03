@@ -75,14 +75,14 @@ class RendezVousController extends Controller
    //     }
      // Fusionner les rendez-vous du commercial et ceux de ses collaborateurs
       $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
-    dd($tousLesRendezVous);
+    //dd($tousLesRendezVous);
     // Passer les rendez-vous à la vue
 
 
     // $id = Auth::user()->id;
      //   $rds = Rd::with('client')->orderBy('created_at', 'desc')->where('user_id',$id)->get();
       //  $date = Carbon::parse($rds->date_du_rdv); // Convertir en objet Carbon
-        return view('rds.index', compact('mesRendezVous'));
+        return view('rds.index', compact('tousLesRendezVous'));
     }
 
 

@@ -48,7 +48,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($mesRendezVous as $rd)
+                                    @foreach ($tousLesRendezVous as $rd)
 
                                     <tr>
                                         <td>{{ $rd->client->user->nom }}</td>
