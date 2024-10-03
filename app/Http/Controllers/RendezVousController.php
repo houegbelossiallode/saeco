@@ -110,7 +110,7 @@ class RendezVousController extends Controller
         $rd->prime = $request->prime;
         $rd->commercial_id = $user->id;
         $rd->save();
-
+        dd($user->id);
         return redirect()->route("rds.index")->with("success","Rendez-vous  enregistré avec succès");
 
   }
