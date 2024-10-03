@@ -37,9 +37,7 @@ class RendezVousController extends Controller
 
      // Récupérer l'utilisateur connecté
     $user = Auth::user();
-   // dd($user->id);
-   $commercial = Commercial::all();
-   dd($commercial);
+  
     // Récupérer le commercial associé à l'utilisateur
     $commercial = Commercial::where('user_id',$user->id)->first(); // Le commercial associé à cet utilisateur
    //dd($commercial->user_id);
@@ -65,11 +63,11 @@ class RendezVousController extends Controller
    // Si l'utilisateur est un manager (un commercial avec des subordonnés)
    // Si l'utilisateur est un simple commercial sans subordonnés
     if ($commercial->collaborateurs->isEmpty()) {
-        $mesRendezVous = Rd::where('commercial_id',$commercial->user_id)->get();
+        $mesRendezVous = Rd::where('commercial_id',$commercial->id)->get();
       }
     else {
        // Récupérer les rendez-vous du manager et de ses subordonnés
-       $mesRendezVous = Rd::where('commercial_id',$commercial->user_id)
+       $mesRendezVous = Rd::where('commercial_id',$commercial->id)
            ->orWhereIn('commercial_id', $commercial->collaborateurs->pluck('commercial_id'))
            ->get();
         }
