@@ -101,11 +101,10 @@ class RendezVousController extends Controller
       $date = $request->date_du_rdv;
      // dd($date);
       $formattedDate = date('Y-m-d', strtotime($date));
-
+      $user = Auth::user();
          // Récupérer l'utilisateur connecté
-    $user = Auth::user();
-
-    $user = User::where('id', Auth::user()->id)->first();
+         $commercial = Commercial::where('user_id',$user->id)->first(); // Le commercial associé à cet utilisateur
+         //dd($commercial->user_id);
         $rd->date_du_rdv = $formattedDate;
         $rd->client_id =  $request->client_id;
         $rd->produit_id =  $request->produit_id;
