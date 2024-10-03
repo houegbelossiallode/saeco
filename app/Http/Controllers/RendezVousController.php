@@ -50,7 +50,7 @@ class RendezVousController extends Controller
    // $mesRendezVous = Rd::where('user_id',$commercial->user_id)->get();
    // dd($mesRendezVous);
     // Récupérer les collaborateurs et leurs rendez-vous
-    $rendezVousCollaborateurs = collect(); // Créer une collection vide
+   // $rendezVousCollaborateurs = collect(); // Créer une collection vide
 
     // Vérifiez si le commercial a des collaborateurs
    // if ($commercial->collaborateurs()->count() > 0) {
@@ -65,17 +65,17 @@ class RendezVousController extends Controller
     if ($commercial->collaborateurs->isEmpty()) {
         $mesRendezVous = Rd::with('commercial')->where('user_id',$commercial->user_id)->get();
       }
-   else {
+    else {
        // Récupérer les rendez-vous du manager et de ses subordonnés
        $mesRendezVous = Rd::with('commercial')->where('user_id',$commercial->user_id)
            ->orWhereIn('user_id', $commercial->collaborateurs->pluck('user_id'))
            ->get();
         }
-    // Fusionner les rendez-vous du commercial et ceux de ses collaborateurs
-   // $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
-   foreach ($mesRendezVous as $rd) {
+     // Fusionner les rendez-vous du commercial et ceux de ses collaborateurs
+     // $tousLesRendezVous = $mesRendezVous->merge($rendezVousCollaborateurs);
+     foreach ($mesRendezVous as $rd) {
      dd($rd->commercial);
-}
+     }
     // Passer les rendez-vous à la vue
 
 

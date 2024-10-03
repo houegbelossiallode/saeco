@@ -17,7 +17,7 @@ class Rd extends Model
 
     public function commercial()
     {
-        return $this->belongsTo(Commercial::class);
+        return $this->belongsTo(Commercial::class,'user_id');
     }
 
     public function produit()
