@@ -47,7 +47,7 @@ class RendezVousController extends Controller
    // }
    // dd($commercial->id);
     // Récupérer les rendez-vous du commercial connecté
-    $mesRendezVous = Rd::where('user_id',$commercial->user_id)->get();
+   // $mesRendezVous = Rd::where('user_id',$commercial->user_id)->get();
    // dd($mesRendezVous);
     // Récupérer les collaborateurs et leurs rendez-vous
     $rendezVousCollaborateurs = collect(); // Créer une collection vide
