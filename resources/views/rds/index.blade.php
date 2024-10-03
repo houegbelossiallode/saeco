@@ -41,6 +41,7 @@
                                         <th>Notes</th>
                                         <th>prime</th>
                                         <th>Date de RDV</th>
+                                        <th>Nom et prénom du commercial</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -54,6 +55,7 @@
                                         <td>{{ $rd->notes}}</td>
                                         <td>{{ $rd->prime}}</td>
                                         <td>{{ \Carbon\Carbon::parse($rd->date_du_rdv)->format('d/m/Y')}}</td>
+                                        <td>{{ $rd->commercial->user->nom . ' ' . $rd->commercial->user->prenom}}</td>
                                         <td>
 
                                                 <a href="{{ route('rds.edit', $rd->id) }}"
