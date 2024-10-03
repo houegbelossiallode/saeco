@@ -40,7 +40,7 @@ class RendezVousController extends Controller
 
     // Récupérer le commercial associé à l'utilisateur
     $commercial = Commercial::where('user_id',$user->id)->first(); // Le commercial associé à cet utilisateur
-   //dd($commercial->user_id);
+   dd($commercial->user_id);
     // Vérifiez si le commercial existe
    // if (!$commercial) {
    //     return redirect()->back()->withErrors(['error' => 'Aucun commercial associé à cet utilisateur.']);
