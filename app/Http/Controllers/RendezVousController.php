@@ -40,15 +40,15 @@ class RendezVousController extends Controller
 
     // Récupérer le commercial associé à l'utilisateur
     $commercial = Commercial::where('user_id',$user->id)->first(); // Le commercial associé à cet utilisateur
-   dd($commercial->user_id);
+   //dd($commercial->user_id);
     // Vérifiez si le commercial existe
    // if (!$commercial) {
    //     return redirect()->back()->withErrors(['error' => 'Aucun commercial associé à cet utilisateur.']);
    // }
    // dd($commercial->id);
     // Récupérer les rendez-vous du commercial connecté
-    $mesRendezVous = Rd::where('user_id');
-   // dd($mesRendezVous);
+    $mesRendezVous = Rd::where('user_id',$commercial->user_id);
+    dd($mesRendezVous);
     // Récupérer les collaborateurs et leurs rendez-vous
     $rendezVousCollaborateurs = collect(); // Créer une collection vide
 
