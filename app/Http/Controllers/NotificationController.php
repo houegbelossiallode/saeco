@@ -22,7 +22,7 @@ class NotificationController extends Controller
 
         foreach ($rendezVous as $rendez) {
             // Envoyer l'email
-            $destinataire = User::find($rendez->user_id); // Remplace par le nom réel
+            $destinataire = User::find($rendez->commercial_id); // Remplace par le nom réel
             $destinataire->notify(new RendezVousNotification($rendez));
 
            // Mail::to('chef@example.com')->send(new RendezVousNotification($clientName, $today->format('Y-m-d')));
@@ -44,7 +44,7 @@ class NotificationController extends Controller
     //      ]);
 
             // Envoyer l'email
-            $destinataire = User::find($rendez->user_id); // Remplace par le nom réel
+            $destinataire = User::find($rendez->commercial_id); // Remplace par le nom réel
             $destinataire->notify(new RendezVousNotification($rendez));
 
            // Mail::to('chef@example.com')->send(new RendezVousNotification($clientName, $today->format('Y-m-d')));
