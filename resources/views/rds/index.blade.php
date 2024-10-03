@@ -38,6 +38,7 @@
                                     <tr>
                                         <th>Nom </th>
                                         <th>Prenom </th>
+                                        <th>Produit</th>
                                         <th>Notes</th>
                                         <th>prime</th>
                                         <th>Date de RDV</th>
@@ -52,6 +53,7 @@
                                     <tr>
                                         <td>{{ $rd->client->user->nom }}</td>
                                         <td>{{ $rd->client->user->prenom }}</td>
+                                        <td>{{ $rd->produit->nomProduit }}</td>
                                         <td>{{ $rd->notes}}</td>
                                         <td>{{ $rd->prime}}</td>
                                         <td>{{ \Carbon\Carbon::parse($rd->date_du_rdv)->format('d/m/Y')}}</td>

@@ -20,4 +20,9 @@ class Rd extends Model
         return $this->belongsTo(Commercial::class);
     }
 
+    public function produit()
+    {
+        return $this->belongsTo(Produit::class);
+    }
+
 }
