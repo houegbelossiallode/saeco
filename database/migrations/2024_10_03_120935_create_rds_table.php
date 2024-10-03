@@ -16,8 +16,11 @@ return new class extends Migration
             $table->date('date_du_rdv');
             $table->text('notes')->nullable();
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('commercial_id')->constrained('commercials')->onDelete('cascade');
             $table->foreignId('produit_id')->constrained('produits')->onDelete('cascade');
+            $table->string('prime');
+            $table->string('code')->nullable()->unique();
+
             $table->timestamps();
         });
     }
