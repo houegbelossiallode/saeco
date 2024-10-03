@@ -57,7 +57,7 @@
                                         <td>{{ $rd->notes}}</td>
                                         <td>{{ $rd->prime}}</td>
                                         <td>{{ \Carbon\Carbon::parse($rd->date_du_rdv)->format('d/m/Y')}}</td>
-                                        <td>{{ $rd->commercial->user->nom }}</td>
+                                        <td>{{ $rd->commercial->user->nom ?? 'Aucun' }}</td>
                                         <td>
 
                                                 <a href="{{ route('rds.edit', $rd->id) }}"
