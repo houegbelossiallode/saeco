@@ -77,12 +77,22 @@ class NotificationController extends Controller
 
 
   public function info(){
+    
     $user = Auth::user();
-  
     // Récupérer le commercial associé à l'utilisateur
     $commercial = Commercial::where('user_id',$user->id)->first(); // Le commercial associé à cet utilisateur
-     $retenus = Retenu::where('commercial_id',$commercial->id)->with('client')->get();
-
+    $mesretenus = Retenu::where('commercial_id',$commercial->id)->with('client')->get();
+    
+     $retenusCollaborateurs = collect(); // Créer une collection vide
+     // Vérifiez si le commercial a des collaborateurs
+     if ($commercial->collaborateurs()->count() > 0) {
+         // Si le commercial a des collaborateurs, on récupère leurs retenus
+         $collaborateurs = $commercial->collaborateurs()->get();
+         $retenusCollaborateurs = $collaborateurs->flatMap(function ($collaborateur) {
+             return $collaborateur->retenus()->get();
+         });
+     }
+     $retenus = $mesretenus->merge($retenusCollaborateurs);
      return view('retenu.liste',compact('retenus'));
 
   }

@@ -56,7 +56,6 @@ class RendezVousController extends Controller
    // dd($mesRendezVous);
     // Récupérer les collaborateurs et leurs rendez-vous
     $rendezVousCollaborateurs = collect(); // Créer une collection vide
-
     // Vérifiez si le commercial a des collaborateurs
     if ($commercial->collaborateurs()->count() > 0) {
         // Si le commercial a des collaborateurs, on récupère leurs rendez-vous
