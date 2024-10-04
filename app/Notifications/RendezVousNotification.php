@@ -56,20 +56,20 @@ class RendezVousNotification extends Notification
 
         // Déterminer si le rendez-vous est pour demain ou aujourd'hui
         if ($rendezVousDate->isTomorrow()) {
-            $message = 'Votre rendez-vous est prévu pour demain.';
+            $rendezVousMessage = 'Votre rendez-vous est prévu pour demain.';
         } elseif ($rendezVousDate->isToday()) {
-            $message = 'Votre rendez-vous est prévu pour aujourd\'hui.';
+            $rendezVousMessage = 'Votre rendez-vous est prévu pour aujourd\'hui.';
         } else {
-            $message = 'Votre rendez-vous est prévu pour le ' . $rendezVousDate->format('d/m/Y') .'.';
+            $rendezVousMessage = 'Votre rendez-vous est prévu pour le ' . $rendezVousDate->format('d/m/Y') .'.';
        }
 
        $appUrl = config('app.url');
-       
+       $action = $appUrl . '/rds/show/' . $this->rendezvous->id;
         return (new MailMessage)
                     ->subject('Rappel de rendez-vous')
-                    ->line($message)
-                    ->action('Voir le rendez-vous', $appUrl . '/rds/show/' . $this->rendezvous->id) // Génère 
-                    ->view('notifications.rds', ['message'=>$message,'nom' =>  $this->rendezvous->client->user->nom,'prenom'=>$this->rendezvous->client->user->prenom,'date'=>$this->rendezvous->date_du_rdv]);
+                   // ->line($message)
+                  //  ->action('Voir le rendez-vous', $appUrl . '/rds/show/' . $this->rendezvous->id) // Génère 
+                    ->view('notifications.rds', ['rendezVousMessage'=> $rendezVousMessage,'nom' =>  $this->rendezvous->client->user->nom,'prenom'=>$this->rendezvous->client->user->prenom,'date'=>$this->rendezvous->date_du_rdv,'action'=>$action]);
                    
                 }
 
