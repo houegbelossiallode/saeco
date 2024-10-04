@@ -32,6 +32,7 @@
                                     <th>Titre</th>
                                     <th>Contenu</th>
                                     <th>Client</th>
+                                    <th>Commercial</th>
                                     <th>Date</th>
                                     <th>Action</th>
                                 </tr>
@@ -42,6 +43,7 @@
                                         <td>{{ $retenu->titre }}</td>
                                         <td>{{ $retenu->contenu }}</td>
                                         <td>{{ $retenu->client->user->nom .' ' .  $retenu->client->user->prenom}}</td>
+                                        <td>{{ $retenu->commercial->user->nom .' ' .  $retenu->commercial->user->prenom}}</td>
                                         <td>{{ $retenu->created_at }}</td>
                                      <!-- 
                                         <td>
