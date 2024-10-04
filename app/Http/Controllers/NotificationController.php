@@ -42,16 +42,13 @@ class NotificationController extends Controller
       //          'prospect_id' =>  $rendez->prospect_id,
       //          'message' => "Vous avez un rendez-vous  aujourd'hui.",
     //      ]);
-    $commercial = $rendez->commercial;
-    dd($commercial);
+   // $commercial = $rendez->commercial;
+    //dd($commercial);
             // Envoyer l'email
-            //$destinataire = User::find($rendezVous->$commercial); // Remplace par le nom réel
-            if($commercial){
-                $commercial->notify(new RendezVousNotification($rendez));
-            }
-            else{
-                return 'Aucun commercial trouvé pour ce rendez-vous';
-            }
+            $destinataire = User::find($rendez->commercial->user->id); // Remplace par le nom réel
+            
+            $destinataire->notify(new RendezVousNotification($rendez));
+            
            
 
            // Mail::to('chef@example.com')->send(new RendezVousNotification($clientName, $today->format('Y-m-d')));
