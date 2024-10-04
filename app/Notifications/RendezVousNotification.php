@@ -56,9 +56,9 @@ class RendezVousNotification extends Notification
 
         // Déterminer si le rendez-vous est pour demain ou aujourd'hui
         if ($rendezVousDate->isTomorrow()) {
-            $rendezVousMessage = 'Votre rendez-vous est prévu pour demain.';
+            $rendezVousMessage = 'Votre rendez-vous est prévu pour demain';
         } elseif ($rendezVousDate->isToday()) {
-            $rendezVousMessage = 'Votre rendez-vous est prévu pour aujourd\'hui.';
+            $rendezVousMessage = 'Votre rendez-vous est prévu pour aujourd\'hui';
         } else {
             $rendezVousMessage = 'Votre rendez-vous est prévu pour le ' . $rendezVousDate->format('d/m/Y') .'.';
        }

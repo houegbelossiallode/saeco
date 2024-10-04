@@ -8,6 +8,6 @@
 
            {{ $nom . ' ' . $prenom }} 
         </p> <br>
-        voir plus {{ $action }}
+        Détails du rendez-vous <a href="{{ $action }}"><button class="btn btn-success">Voir</button></a> 
     </div>
 @endsection
