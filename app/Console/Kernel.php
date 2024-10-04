@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Appelle la méthode pour envoyer les notifications tous les jours à minuit
+       $schedule->command('app:check-rendez-vous')->dailyAt('20:00');
        $schedule->command('app:check-rendez-vous')->everyTenMinutes();
     }
 
