@@ -6,7 +6,7 @@
             <h3>Détails du rendez-vous</h3>
         </div>
         <div class="card-body">
-            <h5 class="card-title">Rendez-vous n°{{ $rendezvous->id }}</h5>
+            
             <p><strong>Date du rendez-vous :</strong> {{ \Carbon\Carbon::parse($rendezvous->date_du_rdv)->format('d/m/Y') }}</p>
             <p><strong>Notes :</strong> {{ $rendezvous->notes }}</p>
 
