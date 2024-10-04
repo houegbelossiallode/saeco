@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rds', function (Blueprint $table) {
+        Schema::table('rds', function (Blueprint $table) {
             $table->id();
             $table->date('date_du_rdv');
             $table->text('notes')->nullable();
@@ -19,9 +19,10 @@ return new class extends Migration
             $table->foreignId('commercial_id')->constrained('commercials')->onDelete('cascade');
             $table->foreignId('produit_id')->constrained('produits')->onDelete('cascade');
             $table->string('prime');
-            $table->string('code')->nullable()->unique();
-
             $table->timestamps();
+            $table->softDeletes();
+
+            
         });
     }
 
@@ -30,6 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rds');
+        Schema::table('rds', function (Blueprint $table) {
+            //
+        });
     }
 };
