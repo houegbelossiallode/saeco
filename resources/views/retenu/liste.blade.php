@@ -45,10 +45,10 @@
                                         <td>{{ $retenu->created_at }}</td>
                                      <!-- 
                                         <td>
-                                            <a href="{{ route('info.edit', ['idinfo' => $info->id, 'idclient' => $idclient]) }}"
+                                            <a href=""
                                                 class="btn btn-small btn-outline edit-row-btn"><i class="ti-pencil"
                                                     aria-hidden="true"></i></a>
-                                            <a href="{{ route('info.delete', ['idinfo' => $info->id, 'idclient' => $idclient]) }}"
+                                            <a href=""
                                                 class="btn btn-small btn-outline delete-row-btn red"><i class="ti-close"
                                                     aria-hidden="true"></i></a>
                                         </td>
