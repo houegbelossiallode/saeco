@@ -35,7 +35,7 @@ class NotificationController extends Controller
         // Récupérer les rendez-vous d'aujourd'hui
         $rendezVous = Rd::whereDate('date_du_rdv', $today)->get();
 
-        foreach ($rendezVous as $rendez) {
+      //  foreach ($rendezVous as $rendez) {
             // Créer la notification dans la table
       //      Notification::create([
       //          'systeme_id' =>  $rendez->systeme_id,
@@ -44,11 +44,11 @@ class NotificationController extends Controller
     //      ]);
 
             // Envoyer l'email
-            $destinataire = User::find($rendez->commercial_id); // Remplace par le nom réel
+            $destinataire = User::find($rendez->commercial->id); // Remplace par le nom réel
             $destinataire->notify(new RendezVousNotification($rendez));
 
            // Mail::to('chef@example.com')->send(new RendezVousNotification($clientName, $today->format('Y-m-d')));
-        }
+       // }
 
         return response()->json(['message' => 'Notifications envoyées !']);
     }
