@@ -43,8 +43,9 @@ class NotificationController extends Controller
       //          'message' => "Vous avez un rendez-vous  aujourd'hui.",
     //      ]);
     $commercial = $rendez->commercial;
+    dd($commercial);
             // Envoyer l'email
-            //$destinataire = User::find($rendezVous->commercial_id); // Remplace par le nom réel
+            //$destinataire = User::find($rendezVous->$commercial); // Remplace par le nom réel
             if($commercial){
                 $commercial->notify(new RendezVousNotification($rendez));
             }
