@@ -43,8 +43,12 @@
                                                 class="material-icons">adjust</i><span class="hide-menu">Mon
                                                 réseau</span></a></li>
                                      <li><a href="{{ route('rds.index') }}"><i
-                                                    class="material-icons">adjust</i><span class="hide-menu">Mes Rendez-vous
+                                                    class="material-icons">adjust</i><span class="hide-menu">
+                                         Les informations sur mes clients
                                      </span></a></li>
+                                     <li><a href="{{ route('info') }}"><i
+                                        class="material-icons">adjust</i><span class="hide-menu">Mes Rendez-vous
+                                    </span></a></li>
                                 @endif
 
                                 @if (Auth::user()->role == 'Courtier')

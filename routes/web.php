@@ -84,6 +84,7 @@ Route::get('/', function () {
 
 
     //Route information client
+    Route::get('/info/liste', [NotificationController::class, 'info'])->name('info');
     Route::get('/users/client/info/liste/{id}', [UsersController::class, 'listeinfo'])->name('info.liste');
     Route::get('/users/client/info/new/{id}', [UsersController::class, 'newinfo'])->name('info.new');
     Route::post('/users/client/info/add/{id}', [UsersController::class, 'addinfo'])->name('info.add');

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commercial;
 use App\Models\Rd;
 use App\Models\User;
 use App\Notifications\RendezVousNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\Retenu;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
@@ -74,7 +76,16 @@ class NotificationController extends Controller
 }
 
 
+  public function info(){
+    $user = Auth::user();
+  
+    // Récupérer le commercial associé à l'utilisateur
+    $commercial = Commercial::where('user_id',$user->id)->first(); // Le commercial associé à cet utilisateur
+     $retenus = Retenu::where('commercial_id',$commercial->id)->with('client')->get();
 
+     return view('retenu.liste',compact('retenus'));
+
+  }
 
 
 
