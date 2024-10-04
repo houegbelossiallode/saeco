@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('rds', function (Blueprint $table) {
+        Schema::create('rds', function (Blueprint $table) {
             $table->id();
             $table->date('date_du_rdv');
             $table->text('notes')->nullable();
@@ -31,8 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('rds', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('rds');
     }
 };
